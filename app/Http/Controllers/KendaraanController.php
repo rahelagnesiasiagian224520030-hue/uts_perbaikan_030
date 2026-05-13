@@ -12,7 +12,10 @@ class KendaraanController extends Controller
      */
     public function index()
     {
-        //
+        $kendaraans = \App\Models\Kendaraan::all(); 
+
+    // 2. Kirim variabel ke view 'index'
+    return view('kendaraan.index', compact('kendaraans'));
     }
 
     /**
