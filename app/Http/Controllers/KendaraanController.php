@@ -56,7 +56,7 @@ class KendaraanController extends Controller
      */
     public function edit(Kendaraan $kendaraan)
     {
-        //
+    return view('kendaraan.edit', compact('kendaraan'));
     }
 
     /**
@@ -64,7 +64,15 @@ class KendaraanController extends Controller
      */
     public function update(Request $request, Kendaraan $kendaraan)
     {
-        //
+        $request->validate([
+            'nama_pemilik' => 'required',
+        ]);
+
+        // Mengupdate data di database
+        $kendaraan->update($request->all());
+
+        // Kembali ke daftar servis
+        return redirect()->route('kendaraan.index');
     }
 
     /**
@@ -72,6 +80,8 @@ class KendaraanController extends Controller
      */
     public function destroy(Kendaraan $kendaraan)
     {
-        //
+        $kendaraan->delete();
+        
+        return redirect()->route('kendaraan.index');
     }
 }
