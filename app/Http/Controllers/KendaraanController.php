@@ -18,12 +18,9 @@ class KendaraanController extends Controller
     return view('kendaraan.index', compact('kendaraans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('kendaraan.create');
     }
 
     /**
@@ -31,7 +28,19 @@ class KendaraanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $request->validate([
+        'nama_pemilik' => 'required',
+        'plat_nomor'   => 'required',
+        'merk_kendaraan' => 'required',
+        'keluhan'      => 'required',
+    ]);
+
+    // 2. Simpan ke Database
+    // Ini bekerja karena Anda sudah mengatur $fillable di Model (Poin 2)
+    \App\Models\Kendaraan::create($request->all());
+
+    // 3. Redirect (Instruksi: arahkan kembali ke halaman Daftar Servis)
+    return redirect()->route('kendaraan.index')->with('success', 'Data berhasil disimpan!');
     }
 
     /**

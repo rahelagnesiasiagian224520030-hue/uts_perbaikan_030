@@ -12,9 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kendaraans', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        $table->id(); // Primary Key & Auto-increment
+        $table->string('plat_nomor'); // Kolom yang tadi dilaporkan hilang
+        $table->string('nama_pemilik');
+        $table->string('merk_kendaraan');
+        $table->text('keluhan');
+        $table->timestamps(); // Menghasilkan created_at & updated_at
+    });
     }
 
     /**
